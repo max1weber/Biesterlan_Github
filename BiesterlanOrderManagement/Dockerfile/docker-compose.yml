@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  adminwebui:
+    image: ${DOCKER_REGISTRY}adminwebui
+    build:
+      context: .
+      dockerfile: AdminWebUI\Dockerfile
