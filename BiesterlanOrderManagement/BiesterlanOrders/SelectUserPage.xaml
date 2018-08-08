@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="BiesterlanOrders.SelectUserPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BiesterlanOrders"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:user1="using:BiesterlanOrders.Models"
+    xmlns:viewmodels="using:BiesterlanOrders.ViewModels"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <GridView ItemsSource="{x:Bind Items}" SelectionChanged="GridView_SelectionChanged">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="viewmodels:UserViewModel" >
+                    <StackPanel Height="280" Width="180" Margin="12" >
+
+                        <TextBlock FontFamily="Verdana" FontSize="72"
+ FontStyle="Italic" FontWeight="Bold">
+    SHRUBBERY
+                            <TextBlock.Foreground>
+                                <ImageBrush ImageSource="https://localhost:44312/files/GetUserImageFile/21cd500d-4207-4493-8cfb-0eab2be50b15"/>
+                            </TextBlock.Foreground>
+                        </TextBlock>
+                        <Image>
+                            <Image.Source>
+                                <BitmapImage UriSource="https://localhost:44312/files/GetUserImageFile/21cd500d-4207-4493-8cfb-0eab2be50b15" ImageFailed="BitmapImage_ImageFailed"   />
+                            </Image.Source>
+                        </Image>
+
+                        <StackPanel Margin="10  ,12">
+                            <TextBlock Text="{x:Bind User.Name}"/>
+                        </StackPanel>
+                        
+                        
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid  MaximumRowsOrColumns="8" Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+        </GridView>
+    </Grid>
+</Page>
