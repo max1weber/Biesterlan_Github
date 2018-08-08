@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace BiesterlanOrders.ViewModels
 {
@@ -20,10 +21,15 @@ namespace BiesterlanOrders.ViewModels
         }
 
 
-        public Uri ImageSource
+        public BitmapImage ImageSource
         {
+            get {
+                var endpoint = App.fileService.GetUserImageFileUrl(User.ID);
+                var bitmapImage = new BitmapImage() { UriSource = endpoint };
 
-            get { return App.fileService.GetUserImageFileUrl(User.ID); }
+                return bitmapImage;
+            
+            }
         }
 
     }

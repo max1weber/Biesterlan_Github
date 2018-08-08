@@ -1,4 +1,5 @@
 ﻿using BiesterlanOrders.Models;
+using BiesterlanOrders.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,8 +26,8 @@ namespace BiesterlanOrders
     {
         private NavigationEventArgs nea;
 
-        private User selecteduser;
-        private List<ViewModels.OrderlineViewModel> orderlines;
+        private UserViewModel selecteduser;
+        private List<OrderlineViewModel> orderlines;
 
 
         public MyOrders()
@@ -37,7 +38,7 @@ namespace BiesterlanOrders
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             nea = e;
-            User userid = (User)e.Parameter;
+            UserViewModel userid = (UserViewModel)e.Parameter;
 
             selecteduser = userid;
 
@@ -50,6 +51,7 @@ namespace BiesterlanOrders
 
 
         }
+        
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             selecteduser = null;

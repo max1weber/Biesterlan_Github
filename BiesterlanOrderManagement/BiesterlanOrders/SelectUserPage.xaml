@@ -16,18 +16,7 @@
                 <DataTemplate x:DataType="viewmodels:UserViewModel" >
                     <StackPanel Height="280" Width="180" Margin="12" >
 
-                        <TextBlock FontFamily="Verdana" FontSize="72"
- FontStyle="Italic" FontWeight="Bold">
-    SHRUBBERY
-                            <TextBlock.Foreground>
-                                <ImageBrush ImageSource="https://localhost:44312/files/GetUserImageFile/21cd500d-4207-4493-8cfb-0eab2be50b15"/>
-                            </TextBlock.Foreground>
-                        </TextBlock>
-                        <Image>
-                            <Image.Source>
-                                <BitmapImage UriSource="https://localhost:44312/files/GetUserImageFile/21cd500d-4207-4493-8cfb-0eab2be50b15" ImageFailed="BitmapImage_ImageFailed"   />
-                            </Image.Source>
-                        </Image>
+                        <Image Height="200" Width="150" Source="{x:Bind ImageSource, Mode=OneWay}" ImageFailed="BitmapImage_ImageFailed"/>
 
                         <StackPanel Margin="10  ,12">
                             <TextBlock Text="{x:Bind User.Name}"/>

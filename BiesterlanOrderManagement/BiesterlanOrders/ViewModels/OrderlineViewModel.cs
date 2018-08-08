@@ -51,5 +51,19 @@ namespace BiesterlanOrders.ViewModels
 
         }
 
+        public BitmapImage ImageSource
+        {
+            get
+            {
+                var endpoint = App.fileService.GetArticleImageFileUrl(Article.ID);
+
+                
+                    
+                var bitmapImage = new BitmapImage() { UriSource = endpoint };
+
+                return bitmapImage;
+
+            }
+        }
     }
 }

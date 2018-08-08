@@ -23,13 +23,13 @@ namespace BiesterlanOrders.Services.Implementation
         public Uri GetArticleImageFileUrl(Guid id)
         {
 
-            var endpoint = string.Format("{0}/files/GetUserImageFile/{1}", baseurl, id.ToString());
+            var endpoint = string.Format("{0}/files/GetArticleImageFile/{1}", baseurl, id.ToString());
             return new Uri(endpoint);
         }
 
         public Uri GetUserImageFileUrl(Guid id)
         {
-            var endpoint = string.Format("{0}/files/GetArticleImage/{1}", baseurl, id.ToString());
+            var endpoint = string.Format("{0}/files/GetUserImageFile/{1}", baseurl, id.ToString());
             return new Uri(endpoint);
         }
     }

@@ -1,10 +1,12 @@
 ﻿using BiesterlanOrders.Models;
 using BiesterlanOrders.ViewModels;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -65,6 +67,16 @@ namespace BiesterlanOrders
 
         private void BitmapImage_ImageFailed(object sender, ExceptionRoutedEventArgs e)
         {
+            Image img = sender as Image;
+            BitmapImage bitmapImage = new BitmapImage();
+           
+            Uri uri = new Uri("ms-appx:///Assets/NerdPlaceholder.png");
+            bitmapImage.UriSource = uri;
+            img.Source = bitmapImage;
+            img.Width = 154; //set to known width of this source's natural size
+            img.Height = 180;                 //might instead want image to stretch to fill, depends on scenario
+            
+
 
         }
     }

@@ -110,6 +110,7 @@
       <DependentUpon>SelectUserPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\OrderlineViewModel.cs" />
+    <Compile Include="ViewModels\OrdersViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

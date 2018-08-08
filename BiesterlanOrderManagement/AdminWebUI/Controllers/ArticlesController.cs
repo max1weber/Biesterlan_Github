@@ -15,14 +15,10 @@ namespace AdminWebUI.Controllers
     public class ArticlesController : ContextController
 
     {
-        private string imagepath;
+       
         public ArticlesController(BiesterlanDbContext context, IConfiguration configuration) :base( context,configuration)
         {
-          var imgpath=  base.Configuration["ImageStore:Path"];
-            if (!Directory.Exists(imgpath))
-                Directory.CreateDirectory(imgpath);
-
-            imagepath = imgpath;
+          
         }
 
         // GET: Articles
@@ -71,17 +67,19 @@ namespace AdminWebUI.Controllers
                 {
                     var file = files[0];
 
-                    if (file != null && file.Length > 0)
-                    {
-                        var filename = file.FileName;
-                        var newfilepath = Path.Combine(imagepath, filename);
-                        using (var fileStream = new FileStream(Path.Combine(imagepath, filename), FileMode.Create))
-                        {
-                            await file.CopyToAsync(fileStream);
+                    var filename = file.FileName;
 
+
+                    byte[] imagebytes = null;
+                    using (Stream fs1 = file.OpenReadStream())
+                    {
+                        using (MemoryStream ms1 = new MemoryStream())
+                        {
+                            await fs1.CopyToAsync(ms1);
+                            imagebytes = ms1.ToArray();
+                            article.Image = imagebytes;
+                            article.ImageName = filename;
                         }
-                        
-                        article.ImageName = filename;
                     }
                 }
 
@@ -132,17 +130,19 @@ namespace AdminWebUI.Controllers
                     {
                         var file = files[0];
 
-                        if (file != null && file.Length > 0)
+                        var filename = file.FileName;
+
+
+                        byte[] imagebytes = null;
+                        using (Stream fs1 = file.OpenReadStream())
                         {
-                            var filename = file.FileName;
-                            var newfilepath = Path.Combine(imagepath, filename);
-                            using (var fileStream = new FileStream(Path.Combine(imagepath, filename), FileMode.Create))
+                            using (MemoryStream ms1 = new MemoryStream())
                             {
-                                await file.CopyToAsync(fileStream);
-                                
+                                await fs1.CopyToAsync(ms1);
+                                imagebytes = ms1.ToArray();
+                                article.Image = imagebytes;
+                                article.ImageName = filename;
                             }
-                            
-                            article.ImageName = filename;
                         }
                     }
                     _context.Update(article);

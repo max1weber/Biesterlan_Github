@@ -29,14 +29,14 @@ namespace BiesterlanOrders.Services.Implementation
             
         }
 
-        public List<Order> GetAllOrders()
+        public IQueryable<Order> GetAllOrders()
         {
-            return db.Orders.ToList();
+            return db.Orders.OrderByDescending(o => o.CreateDateTime).AsQueryable();
         }
 
         public List<Order> GetAllUserOrders(string username)
         {
-           return db.Orders.Where(p => p.User.Name.Equals(username)).ToList();
+           return GetAllOrders().Where(p => p.User.Name.Equals(username)).ToList();
         }
 
         public int SaveOrders(Order ordertosave)
@@ -58,9 +58,11 @@ namespace BiesterlanOrders.Services.Implementation
             return db.SaveChanges();
         }
 
-        Order IOrderService.Save()
+        int IOrderService.Save()
         {
-            throw new NotImplementedException();
+            return Save();
         }
+
+        
     }
 }

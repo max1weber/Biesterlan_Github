@@ -30,15 +30,15 @@
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="viewmodels:OrderlineViewModel">
                     <StackPanel Height="290" Width="180" Margin="12" Background="WhiteSmoke" >
-                        <Image Source="/Assets/Foodsmall.png"/>
-                        <StackPanel Margin="10,12" >
+                        <Image Height="150" Width="150" Source="{x:Bind ImageSource, Mode=OneWay}" ImageFailed="Image_ImageFailed"/>
+                        <StackPanel Margin="10,12"  >
                             <TextBlock Foreground="Red" FontFamily="Segoe UI">
                                 <Run Text="{x:Bind Article.Name}"/>
                                 <LineBreak/>
                                € <Run Text="{x:Bind Article.SalesPrice.ToString()}"/>
                                 <LineBreak/>
                               </TextBlock>
-                            <controls:NumericUpDown Width="120"  Minimum="0.00" Maximum="10.00" Value="{x:Bind Amount, Mode=TwoWay}"
+                            <controls:NumericUpDown Foreground="Black" Width="120"  Minimum="0.00" Maximum="10.00" Value="{x:Bind Amount, Mode=TwoWay}"
                                                     SmallChange="1" LargeChange="1"  Margin="10,0,0,0" ValueBarVisibility="Collapsed" HorizontalAlignment="Center">
                                 
                             </controls:NumericUpDown>

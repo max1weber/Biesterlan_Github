@@ -50,5 +50,20 @@ namespace AdminWebUI.Controllers
             FileResult imageUserFile = GetFileFromBytes(user.Image, user.ImageName);
             return imageUserFile;
         }
+
+
+        [HttpGet]
+        public FileResult GetArticleImageFile(Guid? id)
+        {
+            var article = _context.Articles.Find(id);
+            if (article == null)
+            {
+                return null;
+            }
+
+            FileResult imageArticleFile = GetFileFromBytes(article.Image, article.ImageName);
+
+            return imageArticleFile;
+        }
     }
 }

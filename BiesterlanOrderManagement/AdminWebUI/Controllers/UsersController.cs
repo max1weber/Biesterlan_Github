@@ -15,14 +15,11 @@ namespace AdminWebUI.Controllers
     public class UsersController :ContextController
     {
         private readonly BiesterlanDbContext _context;
-        private string imagepath;
         public UsersController(BiesterlanDbContext context,IConfiguration configuration) :base(context,configuration)
         {
-            var imgpath = base.Configuration["ImageStore:Path"];
-            if (!Directory.Exists(imgpath))
-                Directory.CreateDirectory(imgpath);
+           
 
-            imagepath = imgpath;
+          
             _context = context;
         }
 

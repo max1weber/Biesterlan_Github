@@ -9,7 +9,7 @@ namespace BiesterlanOrders.Services.Interfaces
 {
     public interface IOrderService
     {
-        List<Order> GetAllOrders();
+        IQueryable<Order> GetAllOrders();
 
         List<Order> GetAllUserOrders(string username);
 
@@ -17,7 +17,7 @@ namespace BiesterlanOrders.Services.Interfaces
 
         Order AddOrderline(Order order, Orderline line);
 
-        Order Save();
+        int Save();
 
         int SaveOrders(Order ordertosave);
 

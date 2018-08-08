@@ -1,4 +1,4 @@
-﻿<Page
+﻿<Page 
     x:Class="BiesterlanOrders.MyOrders"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,9 +9,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     
-    <Grid>
+    <Grid >
         <CommandBar>
             <AppBarButton Icon="Back" Name="BackButton" HorizontalAlignment="Left" Label="Back" Click="AppBarButton_Click"/>
         </CommandBar>
     </Grid>
+    
+    
 </Page>

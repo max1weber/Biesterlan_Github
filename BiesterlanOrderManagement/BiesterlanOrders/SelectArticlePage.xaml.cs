@@ -6,6 +6,7 @@ using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -21,7 +22,7 @@ namespace BiesterlanOrders
       
         private NavigationEventArgs nea;
 
-        private UserViewModel selecteduser;
+        private  UserViewModel selecteduser;
         private List<ViewModels.OrderlineViewModel> orderlines;
         public SelectArticlePage()
         {
@@ -34,7 +35,7 @@ namespace BiesterlanOrders
             nea = e;
             UserViewModel userid = (UserViewModel)e.Parameter;
 
-            
+            selecteduser = userid;
             base.OnNavigatedTo(e);
 
             BackButton.IsEnabled = this.Frame.CanGoBack;
@@ -113,6 +114,18 @@ namespace BiesterlanOrders
         private void MyOrders_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MyOrders), selecteduser);
+        }
+
+        private void Image_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+            Image img = sender as Image;
+            BitmapImage bitmapImage = new BitmapImage();
+
+            Uri uri = new Uri("ms-appx:///Assets/Foodsmall.png");
+            bitmapImage.UriSource = uri;
+            img.Source = bitmapImage;
+            img.Width = 150; //set to known width of this source's natural size
+            img.Height = 150;
         }
     }
 }
