@@ -16,7 +16,9 @@ namespace BiesterlanOrders.Services.Interfaces
 
         List<Order> GetUserOrders(string username);
 
-       
+        List<UserOrderView> GetUserOrders(Guid? id);
+
+
 
 
     }

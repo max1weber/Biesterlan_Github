@@ -14,13 +14,11 @@ namespace AdminWebUI.Controllers
 {
     public class UsersController :ContextController
     {
-        private readonly BiesterlanDbContext _context;
         public UsersController(BiesterlanDbContext context,IConfiguration configuration) :base(context,configuration)
         {
            
 
           
-            _context = context;
         }
 
         // GET: Users
@@ -210,6 +208,35 @@ namespace AdminWebUI.Controllers
         private bool UserExists(Guid id)
         {
             return _context.Users.Any(e => e.ID == id);
+        }
+
+
+
+        // GET: Users/Details/5
+        public async Task<IActionResult> Orders(Guid? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _context.Users
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userorders = _context.UserOrders.OrderByDescending(p=>p.CreateDateTime).Where(p=>p.UserID.Equals(id)).ToList();
+
+            decimal totalamount = 0;
+                if (userorders.Count()>0)
+                    totalamount =userorders.Sum(p => p.LineTotal);
+
+            ViewBag.Total= totalamount;
+            ViewBag.Name = user.Name;
+
+            return View(userorders);
         }
     }
 }

@@ -3,6 +3,8 @@ using BiesterlanOrders.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -106,6 +108,30 @@ namespace BiesterlanOrders
             });
             App.orderService.SaveOrders(order);
 
+            var xmlToastTemplate = "<toast launch=\"app-defined-string\">" +
+                         "<visual>" +
+                           "<binding template =\"ToastGeneric\">" +
+                             "<text>Order Saved!</text>" +
+                             "<text>" +
+                               string.Format("Order {0} is saved for {1}", order.ID.ToString(), selecteduser.User.Name) +
+                             "</text>" +
+                           "</binding>" +
+                         "</visual>" +
+                       "</toast>";
+
+            // load the template as XML document
+            var xmlDocument = new Windows.Data.Xml.Dom.XmlDocument();
+            xmlDocument.LoadXml(xmlToastTemplate);
+
+            // create the toast notification and show to user
+            var toastNotification = new ToastNotification(xmlDocument);
+            toastNotification.Tag = "OrderSaved";
+            toastNotification.Group = "BiesterlanOrders";
+            toastNotification.ExpirationTime = DateTime.Now.AddSeconds(3);
+            var notification = ToastNotificationManager.CreateToastNotifier();
+            notification.Show(toastNotification);
+
+            
 
             On_BackRequested();
 
@@ -126,6 +152,33 @@ namespace BiesterlanOrders
             img.Source = bitmapImage;
             img.Width = 150; //set to known width of this source's natural size
             img.Height = 150;
+        }
+
+        private void StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+            TextBlock sourceblock = e.OriginalSource as TextBlock;
+
+            if (sourceblock != null)
+            {
+                StackPanel sourcepanel = sourceblock.Parent as StackPanel;
+                if (sourcepanel != null)
+                {
+                    OrderlineViewModel dataitem = sourcepanel.DataContext as OrderlineViewModel;
+
+                    if (dataitem != null)
+                    {
+                        dataitem.Amount += 1;
+                    }
+                }
+
+            }
+           
+        }
+
+        private void StackPanel_Tapped_1(object sender, TappedRoutedEventArgs e)
+        {
+
         }
     }
 }

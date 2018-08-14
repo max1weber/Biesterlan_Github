@@ -21,7 +21,7 @@
 
             <CommandBar.Content>
 
-            <TextBox IsEnabled="False" Background="White" Foreground="Black"  x:Name="usernameTextbox" Text="{x:Bind Path= selecteduser.User.Name}" Width="300"/>
+            <TextBox  IsEnabled="False" Background="White" Foreground="Black"  x:Name="usernameTextbox" Text="{x:Bind Path= selecteduser.User.Name}" Width="300"/>
                 
         </CommandBar.Content>
     </CommandBar>
@@ -29,16 +29,16 @@
         <GridView ItemsSource="{x:Bind orderlines, Mode=TwoWay}" Margin="10,50,0,0" MinWidth="640" HorizontalAlignment="Stretch" >
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="viewmodels:OrderlineViewModel">
-                    <StackPanel Height="290" Width="180" Margin="12" Background="WhiteSmoke" >
+                    <StackPanel Height="290" Width="180" Margin="12" Background="WhiteSmoke" Tapped="StackPanel_Tapped_1" >
                         <Image Height="150" Width="150" Source="{x:Bind ImageSource, Mode=OneWay}" ImageFailed="Image_ImageFailed"/>
-                        <StackPanel Margin="10,12"  >
+                        <StackPanel Margin="10,12" Tapped="StackPanel_Tapped"   >
                             <TextBlock Foreground="Red" FontFamily="Segoe UI">
                                 <Run Text="{x:Bind Article.Name}"/>
                                 <LineBreak/>
                                € <Run Text="{x:Bind Article.SalesPrice.ToString()}"/>
                                 <LineBreak/>
                               </TextBlock>
-                            <controls:NumericUpDown Foreground="Black" Width="120"  Minimum="0.00" Maximum="10.00" Value="{x:Bind Amount, Mode=TwoWay}"
+                            <controls:NumericUpDown  Width="120"  Minimum="0.00" Maximum="10.00" Value="{x:Bind Amount, Mode=TwoWay}"
                                                     SmallChange="1" LargeChange="1"  Margin="10,0,0,0" ValueBarVisibility="Collapsed" HorizontalAlignment="Center">
                                 
                             </controls:NumericUpDown>

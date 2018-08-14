@@ -1,0 +1,59 @@
+﻿@model IEnumerable<BiesterlanOrders.Models.UserOrderView>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+
+<<table class="display" id="example" style="width:100%">
+    <thead>
+        <tr>
+            <th>userId</th>
+            <th>name</th>
+            <th>orderID</th>
+            <th>createDateTime</th>
+            <th>articleName</th>
+            <th>amount</th>
+            <th>salesPrice</th>
+            <th>lineTotal</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>userId</th>
+            <th>name</th>
+            <th>orderID</th>
+            <th>createDateTime</th>
+            <th>articleName</th>
+            <th>amount</th>
+            <th>salesPrice</th>
+            <th>lineTotal</th>
+        </tr>
+    </tfoot>
+</table>
+
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                
+                "ajax": "orders/get",
+                "columns": [
+                    { "data": "userId" },
+                    { "data": "name" },
+                    { "data": "orderID" },
+                    { "data": "createDateTime" },
+                    { "data": "articleName" },
+                    { "data": "amount" },
+                    { "data": "salesPrice" },
+                    { "data": "lineTotal" }
+                ]
+                }
+            );
+        });
+    </script>
+}

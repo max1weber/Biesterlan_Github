@@ -27,7 +27,10 @@ namespace BiesterlanOrders
         private NavigationEventArgs nea;
 
         private UserViewModel selecteduser;
-        private List<OrderlineViewModel> orderlines;
+        public List<UserOrderView> orderlines { get; set; }
+
+        public decimal TotalAmount { get; set; }
+
 
 
         public MyOrders()
@@ -45,13 +48,32 @@ namespace BiesterlanOrders
             base.OnNavigatedTo(e);
 
             BackButton.IsEnabled = this.Frame.CanGoBack;
-            
 
+            InitOrderLines();
 
 
 
         }
-        
+
+        private void InitOrderLines()
+        {
+           orderlines = App.userService.GetUserOrders(selecteduser.User.ID);
+
+            List<UserOrderView> aggregatedorders = orderlines
+                .GroupBy(l => l.ArticleName)
+                .Select(cl => new UserOrderView
+                {
+                    ArticleName = cl.First().ArticleName,
+                    SalesPrice = cl.First().SalesPrice,
+                    Amount = cl.Sum(c => c.Amount),
+                    LineTotal = cl.Sum(c => c.LineTotal)
+                }).ToList();
+
+            orderlines = aggregatedorders;
+            TotalAmount = orderlines.Sum(p => p.LineTotal);
+
+        }
+
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             selecteduser = null;

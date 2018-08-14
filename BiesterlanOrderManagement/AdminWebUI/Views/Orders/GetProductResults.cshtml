@@ -1,0 +1,46 @@
+﻿@model IEnumerable<AdminWebUI.Models.ProductResultModel>
+
+@{
+    ViewData["Title"] = "GetProductResults";
+}
+
+<h2>GetProductResults</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAmount)
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalAmount)
+            </td>
+            
+        </tr>
+}
+        
+    </tbody>
+    <tfoot>
+        <tr>Total Sales : € @ViewBag.TotalSum</tr>
+    </tfoot>
+</table>

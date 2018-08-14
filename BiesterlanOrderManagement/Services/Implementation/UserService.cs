@@ -56,6 +56,17 @@ namespace BiesterlanOrders.Services.Implementation
             throw new NotImplementedException();
         }
 
+        public List<UserOrderView> GetUserOrders(Guid? id)
+        {
+            if (id == null)
+                return db.UserOrders.ToList();
+
+
+            return db.UserOrders.Where(p => p.UserID == id).ToList();
+
+            
+        }
+
         public List<User> GetUsers(bool all)
         {
             throw new NotImplementedException();

@@ -41,6 +41,8 @@ namespace Data
 
         public DbSet<Orderline> Orderlines { get; set; }
 
+        public DbQuery<UserOrderView> UserOrders { get; set; }
+
         #endregion
 
         #region Repository Properties  
@@ -54,6 +56,8 @@ namespace Data
         {
             base.OnModelCreating(modelBuilder);
 
+
+
             //var entityTypeConfigurations = Assembly.GetExecutingAssembly().GetTypes().Where(type =>
             //    !string.IsNullOrEmpty(type.Namespace))
             //    .Where(type => type.GetInterfaces().Contains(typeof(IEntityTypeConfiguration<>)));
@@ -63,7 +67,8 @@ namespace Data
             modelBuilder.ApplyConfiguration(new UserMap());
             modelBuilder.ApplyConfiguration(new Articlemap());
             modelBuilder.ApplyConfiguration(new OrderMap());
-           
+
+            modelBuilder.Query<UserOrderView>().ToView("vwUserOrderLines");
 
 
 

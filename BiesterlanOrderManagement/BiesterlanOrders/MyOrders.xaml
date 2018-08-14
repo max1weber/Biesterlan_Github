@@ -5,6 +5,7 @@
     xmlns:local="using:BiesterlanOrders"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:BiesterlanOrders.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -13,6 +14,31 @@
         <CommandBar>
             <AppBarButton Icon="Back" Name="BackButton" HorizontalAlignment="Left" Label="Back" Click="AppBarButton_Click"/>
         </CommandBar>
+        <TextBlock FontFamily="Segoe UI" Foreground="WhiteSmoke" FontSize="30" Margin="10,50,0,0" HorizontalAlignment="Center">
+            Totaal Verbruikt: € <Run Text="{x:Bind TotalAmount}"/>
+                                <LineBreak/>
+        </TextBlock>
+        <GridView HorizontalAlignment="Left" Height="Auto" Margin="10,100,0,0" VerticalAlignment="Top" Width="auto" ItemsSource="{x:Bind orderlines}">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="models:UserOrderView" >
+                    <StackPanel Height="100" Width="100" Margin="12" Background="WhiteSmoke" >
+
+                        <TextBlock  FontFamily="Segoe UI" Foreground="Black">
+                                <Run Text="{x:Bind ArticleName}"/>
+                                <LineBreak/>
+                               Aantal : <Run Text="{x:Bind Amount}"/>
+                                <LineBreak/>
+                               Prijs € <Run Text="{x:Bind  SalesPrice}"/>
+                                <LineBreak/>
+                                Totaal:  € <Run Text="{x:Bind LineTotal}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+                
+            </GridView.ItemTemplate>
+        </GridView>
+        
+
     </Grid>
     
     
